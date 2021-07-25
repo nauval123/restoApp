@@ -6,8 +6,8 @@ class LocalRestaurant {
   late String description;
   late String pictureId;
   late String city;
-  late String rating;
-  // late List menus;
+  // late int rating;
+  late Menus menus;
   
   LocalRestaurant({
     required this.id,
@@ -15,8 +15,8 @@ class LocalRestaurant {
     required this.description,
     required this.pictureId,
     required this.city,
-    required this.rating,
-    // required this.menus,
+    // required this.rating,
+    required this.menus,
   });
 
   LocalRestaurant.fromJson(Map<String,dynamic> restaurantInfo){
@@ -25,15 +25,63 @@ class LocalRestaurant {
    description = restaurantInfo["description"];
    pictureId = restaurantInfo["pictureId"];
    city = restaurantInfo["city"];
-   rating =  restaurantInfo["rating"];
-  //  menus =  restaurantInfo["menus"];
+  //  rating = restaurantInfo["rating"] ;
+   menus =  Menus.fromJson(restaurantInfo['menus']);
   }
 }
 
-  List<LocalRestaurant> parsingData(String? json){
-     if (json == null) {
-    return [];
+class Menus {
+  late List <Food> food;
+  late List <Drink> drink;
+
+
+  Menus({
+    required this.food,
+    required this.drink,
+  });
+
+   Menus.fromJson(Map<String,dynamic> json){
+    var listfoods = json["foods"] as List;
+     List<Food> foods = listfoods.map((i) => Food.fromJson(i)).toList();
+     var listdrinks = json["drinks"] as List;
+     List<Drink> drinks = listdrinks.map((i) => Drink.fromJson(i)).toList();
+     food = foods;
+     drink = drinks;
   }
-    final List <dynamic> parsed = jsonDecode(json);
-    return parsed.map((json) => LocalRestaurant.fromJson(json)).toList();
+     
+}
+
+List<LocalRestaurant> parsingData(String? json){
+    if (json == null) {
+  return [];
+}
+  Map <String,dynamic> map = jsonDecode(json);
+  final List parsed = map['restaurants'];
+  return parsed.map((json) => LocalRestaurant.fromJson(json)).toList();
+}
+
+class Food {
+  late String name;
+
+  Food({
+    required this.name,
+  });
+
+  Food.fromJson(Map <String,dynamic> json){
+    name= json["name"];
   }
+
+}
+
+class Drink {
+  late String name;
+
+
+  Drink({
+    required this.name,
+  });
+
+  Drink.fromJson(Map<String,dynamic> json){
+    name= json["name"];
+  }
+}

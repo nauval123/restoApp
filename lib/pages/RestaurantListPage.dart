@@ -16,7 +16,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
     // return Center(
     //   child: Text("ListPage dashboard"),
     // );
-    return FutureBuilder<String>(
+    return FutureBuilder<dynamic>(
         future:
             DefaultAssetBundle.of(context).loadString('assets/local_restaurant.json'),
         builder: (context, snapshot) {
