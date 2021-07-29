@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
+// import 'package:restaurant_app/data/model/LocalRestaurant.dart';
 import 'package:restaurant_app/pages/DashBoardPage.dart';
 import 'package:restaurant_app/pages/DetailRestaurantPage.dart';
 import 'package:restaurant_app/pages/SplashScreenPage.dart';

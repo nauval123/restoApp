@@ -6,7 +6,7 @@ class LocalRestaurant {
   late String description;
   late String pictureId;
   late String city;
-  // late int rating;
+  late String rating;
   late Menus menus;
   
   LocalRestaurant({
@@ -15,7 +15,7 @@ class LocalRestaurant {
     required this.description,
     required this.pictureId,
     required this.city,
-    // required this.rating,
+    required this.rating,
     required this.menus,
   });
 
@@ -25,7 +25,7 @@ class LocalRestaurant {
    description = restaurantInfo["description"];
    pictureId = restaurantInfo["pictureId"];
    city = restaurantInfo["city"];
-  //  rating = restaurantInfo["rating"] ;
+   rating = restaurantInfo["rating"].toString() ;
    menus =  Menus.fromJson(restaurantInfo['menus']);
   }
 }
@@ -33,7 +33,6 @@ class LocalRestaurant {
 class Menus {
   late List <Food> food;
   late List <Drink> drink;
-
 
   Menus({
     required this.food,
@@ -75,7 +74,6 @@ class Food {
 
 class Drink {
   late String name;
-
 
   Drink({
     required this.name,

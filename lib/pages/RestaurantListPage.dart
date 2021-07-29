@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/model/LocalRestaurant.dart';
-import 'package:restaurant_app/widgets/CardTile.dart';
+// import 'package:restaurant_app/widgets/CardTile.dart';
+import 'package:restaurant_app/widgets/CardTiles.dart';
 
 class RestaurantListPage extends StatefulWidget {
 
@@ -13,9 +14,6 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Center(
-    //   child: Text("ListPage dashboard"),
-    // );
     return FutureBuilder<dynamic>(
         future:
             DefaultAssetBundle.of(context).loadString('assets/local_restaurant.json'),
@@ -30,8 +28,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
             return ListView.builder(
             itemCount: listRestaurant.length,
             itemBuilder: (context, index) {
-              // print(listRestaurant[index]);
-              return CardTile(restaurantInfo: listRestaurant[index]);
+              return CardTiles(restaurantInfo: listRestaurant[index]);
             },
           );
           }
