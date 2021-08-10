@@ -24,7 +24,7 @@ class DetailRestaurant extends StatelessWidget {
                     expandedHeight: 250,
                     flexibleSpace:  FlexibleSpaceBar(
                       background: Hero(
-                        tag: restaurantInfo, 
+                        tag: restaurantInfo.id, 
                         child: Image.network(
                           restaurantInfo.pictureId,
                           fit: BoxFit.cover,
@@ -100,7 +100,7 @@ class DetailRestaurant extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: restaurantInfo.menus.food.length,
+                            // itemCount: restaurantInfo.menus.food.length,
                             itemBuilder: (BuildContext context , index){
                               return Container(
                                 margin: EdgeInsets.all(10),
@@ -110,7 +110,7 @@ class DetailRestaurant extends StatelessWidget {
                                   color: Colors.orange[800],
                                   borderRadius: BorderRadius.all(Radius.circular(10))
                                 ),
-                                child: Center(child: Wrap(spacing: 10,children: [Icon(Icons.food_bank,color: Colors.white,),Text(restaurantInfo.menus.food[index].name , maxLines: 2,style: TextStyle(fontSize: 15),),],)),
+                                // child: Center(child: Wrap(spacing: 10,children: [Icon(Icons.food_bank,color: Colors.white,),Text(restaurantInfo.menus.food[index].name , maxLines: 2,style: TextStyle(fontSize: 15),),],)),
                               );
                             }
                           ),  
@@ -135,7 +135,7 @@ class DetailRestaurant extends StatelessWidget {
                           padding: EdgeInsets.all(5),
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: restaurantInfo.menus.drink.length,
+                            // itemCount: restaurantInfo.menus.drink.length,
                             itemBuilder: (BuildContext context , index){
                               return Container(
                                 margin: EdgeInsets.all(10),
@@ -145,7 +145,7 @@ class DetailRestaurant extends StatelessWidget {
                                   color: Colors.orange[800],
                                   borderRadius: BorderRadius.all(Radius.circular(10))
                                 ),
-                                child: Center(child: Wrap(spacing: 10, children: [Icon(Icons.local_drink,color: Colors.white,),Text(restaurantInfo.menus.drink[index].name , maxLines: 2,style: TextStyle(fontSize: 15),),],)),
+                                // child: Center(child: Wrap(spacing: 10, children: [Icon(Icons.local_drink,color: Colors.white,),Text(restaurantInfo.menus.drink[index].name , maxLines: 2,style: TextStyle(fontSize: 15),),],)),
                               );
                             }
                           ),  
