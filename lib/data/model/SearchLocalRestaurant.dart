@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 class SearchLocalRestaurant {
-   bool error;
-   int founded;
-  LocalRestaurant localrestaurant;
+  bool error;
+  int founded;
+  List<Restaurant> localrestaurant;
 
   SearchLocalRestaurant({
     required this.error,
@@ -11,24 +9,25 @@ class SearchLocalRestaurant {
     required this.localrestaurant,
   });
 
-  factory SearchLocalRestaurant.fromJson(Map<String,dynamic> searchrestaurantInfo) => SearchLocalRestaurant(
-    error: searchrestaurantInfo['error'], 
-    founded: searchrestaurantInfo['founded'], 
-    localrestaurant: searchrestaurantInfo['restaurants'],
-    );
-
+  factory SearchLocalRestaurant.fromJson(
+          Map<String, dynamic> searchrestaurantInfo) =>
+      SearchLocalRestaurant(
+        error: searchrestaurantInfo['error'],
+        founded: searchrestaurantInfo['founded'],
+        localrestaurant: searchrestaurantInfo['restaurants'],
+      );
 }
 
-class LocalRestaurant {
+class Restaurant {
   late String id;
   late String name;
   late String description;
   late String pictureId;
   late String city;
   late String rating;
-  String pictureBaseUrl="https://restaurant-api.dicoding.dev/images/medium/";
-  
-  LocalRestaurant({
+  String pictureBaseUrl = "https://restaurant-api.dicoding.dev/images/medium/";
+
+  Restaurant({
     required this.id,
     required this.name,
     required this.description,
@@ -37,21 +36,20 @@ class LocalRestaurant {
     required this.rating,
   });
 
-  LocalRestaurant.fromJson(Map<String,dynamic> restaurantInfo){
-   id = restaurantInfo["id"];
-   name = restaurantInfo["name"]; 
-   description = restaurantInfo["description"];
-   pictureId = pictureBaseUrl + restaurantInfo["pictureId"];
-   city = restaurantInfo["city"];
-   rating = restaurantInfo["rating"].toString() ;
+  Restaurant.fromJson(Map<String, dynamic> restaurantInfo) {
+    id = restaurantInfo["id"];
+    name = restaurantInfo["name"];
+    description = restaurantInfo["description"];
+    pictureId = pictureBaseUrl + restaurantInfo["pictureId"];
+    city = restaurantInfo["city"];
+    rating = restaurantInfo["rating"].toString();
   }
 }
 
-List<SearchLocalRestaurant> parsingDataSearch(String? json){
-    if (json == null) {
-  return [];
-}
-  Map <String,dynamic> map = jsonDecode(json);
+parsingToListRestaurant(Map<String, dynamic> map) {
+  if (map.isEmpty) {
+    return [];
+  }
   final List parsed = map['restaurants'];
-  return parsed.map((json) => SearchLocalRestaurant.fromJson(json)).toList();
+  return parsed.map((element) => Restaurant.fromJson(element)).toList();
 }

@@ -3,66 +3,61 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
-
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-
-
-class _SplashScreenState extends State<SplashScreen>  with SingleTickerProviderStateMixin  {
-  // bool _fade = false;
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation <double> _animation;
+  late Animation<double> _animation;
 
   @override
-  void initState() { 
-     _controller = AnimationController(
+  void initState() {
+    _controller = AnimationController(
       vsync: this,
       duration: Duration(seconds: 5),
     )..forward();
-    //Implement animation here
     _animation = Tween<double>(
       begin: 0.0,
       end: 2.0,
     ).animate(_controller);
     beginSplash();
     super.initState();
-    
   }
 
-   @override
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
-
-  beginSplash () async {
+  beginSplash() async {
     var duration = const Duration(seconds: 4);
     // _fade=!_fade;
-    return Timer(duration, (){
-    setState(() {
-           Navigator.pushReplacementNamed(context, '/Dashboard');
-        });
+    return Timer(duration, () {
+      setState(() {
+        Navigator.pushReplacementNamed(context, '/Dashboard');
+      });
     });
-  }  
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
-        child: Hero(
-              tag: "heroLogo",
-              //FadeTransition makes your image Fade
-              child: FadeTransition(
-                //Use your animation here
-                opacity: _animation,
-                child: Image.asset("assets/images/logo.png"),
-              ),
-            )
-      ),
+          child: Hero(
+        tag: "heroLogo",
+        child: FadeTransition(
+          opacity: _animation,
+          child: Center(
+              child: Text(
+            'Yuk Makan',
+            style: Theme.of(context).textTheme.headline3,
+          )),
+        ),
+      )),
     );
   }
 }
