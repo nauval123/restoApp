@@ -71,9 +71,11 @@ class _CardTilesState extends State<CardTiles> {
                     Container(
                       height: 90,
                     ),
-                    Text(
-                      restaurantInfo.name,
-                      style: Theme.of(context).textTheme.headline6,
+                    Expanded(
+                      child: Text(
+                        restaurantInfo.name,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
