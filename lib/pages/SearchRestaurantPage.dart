@@ -18,12 +18,18 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
   final TextEditingController _keyword = TextEditingController();
 
   @override
+  void dispose() {
+    super.dispose();
+    _keyword.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: Consumer<RestaurantSearchProvider>(
-          builder: (context, value, child) => SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: Consumer<RestaurantSearchProvider>(
+        builder: (context, value, child) => SafeArea(
+          child: SingleChildScrollView(
             child: WillPopScope(
               onWillPop: () async {
                 showLoadingDialog(context);
@@ -34,6 +40,8 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
               child: Container(
                 width: displayWidth(context),
                 height: displayHeight(context),
+                padding: EdgeInsets.only(
+                    bottom: displayHalfHeight(context, number: 0.05)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,22 +68,20 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
                           filled: true,
                           fillColor: Theme.of(context).backgroundColor,
                           suffixIcon: IconButton(
-                            onPressed: _keyword.text.isEmpty
-                                ? () {
-                                    showSingleActionDialog(
-                                      context,
-                                      titleText: "Pesan",
-                                      contentText:
-                                          "Kata kunci tidak Boleh Kosong!",
-                                      actionOnPressed: () =>
-                                          Navigator.pop(context),
-                                    );
-                                  }
-                                : () async {
-                                    await value.setSearchState();
-                                    await value.searchRestaurant(
-                                        context, _keyword.text);
-                                  },
+                            onPressed: () async {
+                              if (_keyword.text.isEmpty) {
+                                showSingleActionDialog(
+                                  context,
+                                  titleText: "Pesan",
+                                  contentText: "Kata kunci tidak Boleh Kosong!",
+                                  actionOnPressed: () => Navigator.pop(context),
+                                );
+                              } else {
+                                await value.setSearchState();
+                                await value.searchRestaurant(
+                                    context, _keyword.text);
+                              }
+                            },
                             icon: Icon(
                               Icons.search,
                               color: _keyword.text.isEmpty
