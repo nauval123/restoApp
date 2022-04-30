@@ -5,7 +5,9 @@ import 'package:restaurant_app/common/sizebox.dart';
 import 'package:restaurant_app/common/status.dart';
 import 'package:restaurant_app/data/provider/FavoriteProvider.dart';
 import 'package:restaurant_app/data/provider/RestaurantProvider.dart';
-import 'package:restaurant_app/pages/FavoriteRestaurant.dart';
+import 'package:restaurant_app/data/services/BackgroundService.dart';
+import 'package:restaurant_app/data/services/NotificationHerlper.dart';
+import 'package:restaurant_app/pages/DetailRestaurantPage.dart';
 import 'package:restaurant_app/pages/RestaurantListPage.dart';
 
 class Dashboard extends StatefulWidget {
@@ -14,14 +16,23 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final NotificationHelper _notificationHelper = NotificationHelper();
   @override
   void initState() {
     super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(DetailRestaurant.routeName);
     Future.delayed(Duration.zero, () {
       Provider.of<RestaurantProvider>(context, listen: false)
           .getListofRestaurant(context);
       Provider.of<FavoriteProvider>(context, listen: false);
     });
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    super.dispose();
   }
 
   @override
@@ -55,7 +66,7 @@ class _DashboardState extends State<Dashboard> {
             backgroundColor: Colors.yellow.shade900,
             child: Icon(Icons.settings, color: Colors.white),
             onPressed: () {
-              print('Settings');
+              Navigator.pushNamed(context, '/Settings');
             },
           ),
           Verticals(20),

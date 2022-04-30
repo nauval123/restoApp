@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/SearchLocalRestaurant.dart';
 import 'package:restaurant_app/data/provider/FavoriteProvider.dart';
 import 'package:restaurant_app/data/provider/RestaurantProvider.dart';
-import 'package:restaurant_app/widgets/dialogs.dart';
 
 class CardTiles extends StatefulWidget {
   final Restaurant restaurantInfo;
@@ -23,8 +22,6 @@ class _CardTilesState extends State<CardTiles> {
 
   @override
   Widget build(BuildContext context) {
-    print('print restuanrant pictuire');
-    print(widget.restaurantInfo.pictureId);
     return Hero(
         tag: widget.restaurantInfo.id,
         child: CachedNetworkImage(
@@ -106,9 +103,6 @@ class _CardTilesState extends State<CardTiles> {
                             child: Consumer<FavoriteProvider>(
                               builder: (context, values, child) => Icon(
                                   values.restaurantList.any((element) {
-                                    print('Status favorit');
-                                    print(
-                                        element.id == widget.restaurantInfo.id);
                                     return element.id ==
                                             widget.restaurantInfo.id
                                         ? true

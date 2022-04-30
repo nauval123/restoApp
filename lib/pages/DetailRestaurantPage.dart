@@ -9,6 +9,8 @@ import 'package:restaurant_app/data/provider/RestaurantProvider.dart';
 import 'package:restaurant_app/widgets/dialogs.dart';
 
 class DetailRestaurant extends StatelessWidget {
+  static const routeName = "/DetailRestaurant";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
