@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/size.dart';
 import 'package:restaurant_app/common/sizebox.dart';
 import 'package:restaurant_app/common/status.dart';
+import 'package:restaurant_app/data/model/SearchLocalRestaurant.dart';
+import 'package:restaurant_app/data/provider/FavoriteProvider.dart';
 import 'package:restaurant_app/data/provider/RestaurantProvider.dart';
 import 'package:restaurant_app/widgets/dialogs.dart';
 
@@ -31,7 +33,9 @@ class DetailRestaurant extends StatelessWidget {
                           background: Hero(
                             tag: '',
                             child: Image.network(
-                              value.detailRestaurant!.localrestaurant.pictureId,
+                              "https://restaurant-api.dicoding.dev/images/medium/" +
+                                  value.detailRestaurant!.localrestaurant
+                                      .pictureId,
                               fit: BoxFit.cover,
                               errorBuilder: (BuildContext context,
                                   Object exception, StackTrace? stackTrace) {
@@ -94,6 +98,79 @@ class DetailRestaurant extends StatelessWidget {
                               ),
                               Text(value
                                   .detailRestaurant!.localrestaurant.rating),
+                              Expanded(
+                                child: Consumer<FavoriteProvider>(
+                                  builder: (context, values, child) => values
+                                          .restaurantList
+                                          .any((element) =>
+                                              element.id ==
+                                              value.detailRestaurant!
+                                                  .localrestaurant.id)
+                                      ? IconButton(
+                                          onPressed: () async {
+                                            await Provider.of<FavoriteProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .unfavoriteRestaurant(
+                                              context,
+                                              Restaurant(
+                                                  id: value.detailRestaurant!
+                                                      .localrestaurant.id,
+                                                  name: value.detailRestaurant!
+                                                      .localrestaurant.name,
+                                                  description: value
+                                                      .detailRestaurant!
+                                                      .localrestaurant
+                                                      .description,
+                                                  pictureId: value
+                                                      .detailRestaurant!
+                                                      .localrestaurant
+                                                      .pictureId,
+                                                  city: value.detailRestaurant!
+                                                      .localrestaurant.city,
+                                                  rating: value
+                                                      .detailRestaurant!
+                                                      .localrestaurant
+                                                      .rating),
+                                            );
+                                          },
+                                          icon: Icon(Icons.favorite,
+                                              color: Colors.red.shade300),
+                                        )
+                                      : IconButton(
+                                          onPressed: () async {
+                                            await Provider.of<FavoriteProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .favoriteRestaurant(
+                                              context,
+                                              Restaurant(
+                                                  id: value.detailRestaurant!
+                                                      .localrestaurant.id,
+                                                  name: value.detailRestaurant!
+                                                      .localrestaurant.name,
+                                                  description: value
+                                                      .detailRestaurant!
+                                                      .localrestaurant
+                                                      .description,
+                                                  pictureId: value
+                                                      .detailRestaurant!
+                                                      .localrestaurant
+                                                      .pictureId,
+                                                  city: value.detailRestaurant!
+                                                      .localrestaurant.city,
+                                                  rating: value
+                                                      .detailRestaurant!
+                                                      .localrestaurant
+                                                      .rating),
+                                            );
+                                          },
+                                          icon: Icon(
+                                              Icons.favorite_border_outlined,
+                                              color: Colors.red.shade300),
+                                        ),
+                                ),
+                              ),
                             ],
                           ),
                           Divider(

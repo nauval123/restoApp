@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/size.dart';
 import 'package:restaurant_app/common/sizebox.dart';
 import 'package:restaurant_app/common/status.dart';
+import 'package:restaurant_app/data/provider/FavoriteProvider.dart';
 import 'package:restaurant_app/data/provider/RestaurantSearchProvider.dart';
 import 'package:restaurant_app/widgets/CardTiles.dart';
 import 'package:restaurant_app/widgets/dialogs.dart';
@@ -128,9 +129,14 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
                               : ListView.builder(
                                   itemCount:
                                       value.listSearchOfRestaurant.length,
-                                  itemBuilder: (context, index) => CardTiles(
+                                  itemBuilder: (context, index) =>
+                                      Consumer<FavoriteProvider>(
+                                    builder: (context, values, child) =>
+                                        CardTiles(
                                       restaurantInfo:
-                                          value.listSearchOfRestaurant[index]),
+                                          value.listSearchOfRestaurant[index],
+                                    ),
+                                  ),
                                 ),
                     )
                   ],
