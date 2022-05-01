@@ -45,7 +45,7 @@ class Restaurants {
     id = detailrestaurantInfo["id"];
     name = detailrestaurantInfo["name"];
     description = detailrestaurantInfo["description"];
-    pictureId = pictureBaseUrl + detailrestaurantInfo["pictureId"];
+    pictureId = detailrestaurantInfo["pictureId"];
     city = detailrestaurantInfo["city"];
     rating = detailrestaurantInfo["rating"].toString();
     categories = detailrestaurantInfo['categories'];

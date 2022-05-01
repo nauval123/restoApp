@@ -40,9 +40,20 @@ class Restaurant {
     id = restaurantInfo["id"];
     name = restaurantInfo["name"];
     description = restaurantInfo["description"];
-    pictureId = pictureBaseUrl + restaurantInfo["pictureId"];
+    pictureId = restaurantInfo["pictureId"];
     city = restaurantInfo["city"];
     rating = restaurantInfo["rating"].toString();
+  }
+
+  toMap() {
+    return {
+      "id": id,
+      "name": name,
+      "description": description,
+      "pictureId": pictureId,
+      "city": city,
+      "rating": rating
+    };
   }
 }
 
