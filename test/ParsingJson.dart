@@ -36,7 +36,6 @@ void main() {
     var get =
         dataRestaurant.where((element) => element.name == 'Kafe Kita').toList();
     var testing = get.first.name == 'Kafe Kita';
-    print(testing);
     expect(testing, true);
   });
 }
