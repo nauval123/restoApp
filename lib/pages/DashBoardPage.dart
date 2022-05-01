@@ -5,12 +5,12 @@ import 'package:restaurant_app/common/sizebox.dart';
 import 'package:restaurant_app/common/status.dart';
 import 'package:restaurant_app/data/provider/FavoriteProvider.dart';
 import 'package:restaurant_app/data/provider/RestaurantProvider.dart';
-import 'package:restaurant_app/data/services/BackgroundService.dart';
 import 'package:restaurant_app/data/services/NotificationHerlper.dart';
-import 'package:restaurant_app/pages/DetailRestaurantPage.dart';
 import 'package:restaurant_app/pages/RestaurantListPage.dart';
 
 class Dashboard extends StatefulWidget {
+  static const routeName = "/Dashboard";
+
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -20,8 +20,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
-    _notificationHelper
-        .configureSelectNotificationSubject(DetailRestaurant.routeName);
+    _notificationHelper.configureSelectNotificationSubject(Dashboard.routeName);
     Future.delayed(Duration.zero, () {
       Provider.of<RestaurantProvider>(context, listen: false)
           .getListofRestaurant(context);
